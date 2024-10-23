@@ -27,7 +27,13 @@
     <Compile Include="POUs\checkDistance.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\lightControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\timerControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

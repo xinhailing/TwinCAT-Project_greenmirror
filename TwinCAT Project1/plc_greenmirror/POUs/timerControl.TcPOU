@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="timerControl" Id="{d0c5777f-1fa4-4c4d-ab2e-69154685f57d}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM timerControl
+VAR
+	 timer : TOF;  // Timer off-delay function block
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Start the TOF timer when the user moves away
+IF NOT CheckDistance(GVL.distanceToMirror) THEN
+    timer(IN := TRUE);
+ELSE
+    timer(IN := FALSE);  // Stop the timer if the user comes back
+END_IF
+
+// Set the timer duration to 15 seconds
+timer(PT := T#15s);
+
+// When the timer finishes, turn off the light
+IF timer.Q THEN
+    GVL.lightStatus := FALSE;
+    GVL.timerActive := FALSE;
+    GVL.timerElapsed := TRUE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="timerControl">
+      <LineId Id="7" Count="15" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
