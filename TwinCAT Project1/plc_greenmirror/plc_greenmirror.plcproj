@@ -21,6 +21,9 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="lightControl_1.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +37,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\timerControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="timerControl_1.TcTTO">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
