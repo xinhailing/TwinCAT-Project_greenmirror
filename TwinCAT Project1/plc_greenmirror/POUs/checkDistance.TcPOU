@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="checkDistance" Id="{454bb1e2-994d-4bd1-9b0d-e3aea2c31f5b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION checkDistance : BOOL
+VAR_INPUT
+	distance : REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// If the distance is less than or equal to 1 meter, return TRUE, else return FALSE
+IF distance <= 1.0 THEN
+    CheckDistance := TRUE;
+ELSE
+    CheckDistance := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="checkDistance">
+      <LineId Id="9" Count="4" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
