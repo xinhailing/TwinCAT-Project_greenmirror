@@ -3,23 +3,23 @@
   <POU Name="lightControl" Id="{0edb4d64-9ccb-48ce-8cde-93a1666a05b9}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM lightControl
 VAR
-	userNearMirror : BOOL;
+    userNearMirror : BOOL;  // Variable to store whether the user is near the mirror
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Call the function to check if the user is near the mirror
-userNearMirror := CheckDistance(GVL.distanceToMirror);
+userNearMirror := checkDistance(distance_in_function := GVL.distance);
 
 // Turn on the light if the user is near the mirror
-IF userNearMirror THEN
+IF userNearMirror = TRUE THEN
     GVL.lightStatus := TRUE;
-ELSE
-    // If the user moves away, start the timer to turn off the light later
-    GVL.lightStatus := TRUE;  // Keep the light ON until the timer runs out
+ELSIF userNearMirror = FALSE THEN
+    // Start the timer when the user moves away from the mirror
+    timerControl();  
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="lightControl">
-      <LineId Id="7" Count="8" />
+      <LineId Id="30" Count="8" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

@@ -6,19 +6,53 @@
 				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
 					<Name>PlcTask</Name>
 				</Task>
+				<Task Id="4" Priority="21" CycleTime="100000" AmsPort="351" AdtTasks="true">
+					<Name>lightControl</Name>
+				</Task>
+				<Task Id="5" Priority="22" CycleTime="100000" AmsPort="352" AdtTasks="true">
+					<Name>timerControl</Name>
+				</Task>
 			</Tasks>
 		</System>
 		<Plc>
 			<Project GUID="{C936A61D-0CB7-4E32-B37F-B6C1877C5CF9}" Name="plc_greenmirror" PrjFilePath="plc_greenmirror\plc_greenmirror.plcproj" TmcFilePath="plc_greenmirror\plc_greenmirror.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="plc_greenmirror\plc_greenmirror.tmc" TmcHash="{D1167C3A-7654-97EE-0F45-4C7B4CF2D21B}">
 					<Name>plc_greenmirror Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id>1</Id>
-							<Name>Default</Name>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">1</Id>
+							<Name>lightControl_1</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>21</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">2</Id>
+							<Name>timerControl_1</Name>
+							<ManualConfig>
+								<OTCID>#x02010050</OTCID>
+							</ManualConfig>
+							<Priority>22</Priority>
+							<CycleTime>10000000</CycleTime>
 						</Context>
 					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+						<TaskPouOid Prio="21" OTCID="#x08502002"/>
+						<TaskPouOid Prio="22" OTCID="#x08502003"/>
+					</TaskPouOids>
 				</Instance>
 			</Project>
 		</Plc>

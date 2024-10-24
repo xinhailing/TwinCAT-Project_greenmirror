@@ -16,15 +16,43 @@
 		</System>
 		<Plc>
 			<Project GUID="{C936A61D-0CB7-4E32-B37F-B6C1877C5CF9}" Name="plc_greenmirror" PrjFilePath="plc_greenmirror\plc_greenmirror.plcproj" TmcFilePath="plc_greenmirror\plc_greenmirror.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="plc_greenmirror\plc_greenmirror.tmc" TmcHash="{9C4D4902-203C-BDFF-2B70-278C0F3E30B3}">
 					<Name>plc_greenmirror Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
 						<Context>
-							<Id>1</Id>
-							<Name>Default</Name>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">1</Id>
+							<Name>lightControl_1</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>21</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">2</Id>
+							<Name>timerControl_1</Name>
+							<ManualConfig>
+								<OTCID>#x02010050</OTCID>
+							</ManualConfig>
+							<Priority>22</Priority>
+							<CycleTime>10000000</CycleTime>
 						</Context>
 					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+						<TaskPouOid Prio="21" OTCID="#x08502002"/>
+						<TaskPouOid Prio="22" OTCID="#x08502003"/>
+					</TaskPouOids>
 				</Instance>
 			</Project>
 		</Plc>

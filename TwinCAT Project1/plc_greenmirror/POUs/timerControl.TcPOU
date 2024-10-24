@@ -7,27 +7,32 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Start the TOF timer when the user moves away
-IF NOT CheckDistance(GVL.distanceToMirror) THEN
-    timer(IN := TRUE);
-ELSE
-    timer(IN := FALSE);  // Stop the timer if the user comes back
+      <ST><![CDATA[// Start the TOF timer if the user moves away (light is still on) and the timer hasn't started
+IF GVL.lightStatus = TRUE AND GVL.timerActive = FALSE THEN
+    GVL.timerActive := TRUE;
+    timer(IN := TRUE, PT := T#15s);  // Start 15-second off-delay timer
 END_IF
 
-// Set the timer duration to 15 seconds
-timer(PT := T#15s);
-
-// When the timer finishes, turn off the light
+// If the timer finishes (Q goes TRUE), turn off the light
 IF timer.Q THEN
-    GVL.lightStatus := FALSE;
-    GVL.timerActive := FALSE;
-    GVL.timerElapsed := TRUE;
+    GVL.lightStatus := FALSE;  // Turn off the light after 15s delay
+    GVL.timerActive := FALSE;  // Reset the timer state
+END_IF
+
+// Reset the timer when the light is off (if the user moves away before timer completes)
+IF GVL.lightStatus = FALSE THEN
+    timer(IN := FALSE);  // Stop the timer
+    GVL.timerActive := FALSE;  // Reset timer active status
 END_IF
 ]]></ST>
     </Implementation>
     <LineIds Name="timerControl">
-      <LineId Id="7" Count="15" />
+      <LineId Id="42" Count="9" />
       <LineId Id="5" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="53" Count="3" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="58" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

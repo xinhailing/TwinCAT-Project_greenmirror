@@ -3,7 +3,7 @@
   <GVL Name="GVL" Id="{ef4b1691-91bd-4796-b076-91122cad1d34}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	distanceToMirror : REAL;    // Distance between user and mirror in meters
+	distance : REAL := 0.0;        // Distance between user and mirror in meters
     lightStatus : BOOL := FALSE;   // Light status (ON/OFF)
     timerActive : BOOL := FALSE;   // Timer active status
     timerElapsed : BOOL := FALSE;  // Timer finished status
