@@ -7,7 +7,7 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[lightControl();
-timerControl();
+//timerControl();
 
 ]]></ST>
     </Implementation>

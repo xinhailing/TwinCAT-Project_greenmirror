@@ -8,13 +8,16 @@ END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[// Start the TOF timer if the user moves away (light is still on) and the timer hasn't started
-IF GVL.lightStatus = TRUE AND GVL.timerActive = FALSE THEN
+IF NOT checkDistance(distance_in_function := GVL.distance) AND GVL.lightStatus THEN
     GVL.timerActive := TRUE;
-    timer(IN := TRUE, PT := T#15s);  // Start 15-second off-delay timer
+    timer(IN := TRUE, PT := T#15S);  // Start 15second off-delay timer
+ELSE
+    timer(IN := FALSE); // Deactivate the timer if the user is near the mirror
 END_IF
 
 // If the timer finishes (Q goes TRUE), turn off the light
-IF timer.Q THEN
+//ELSIF NOT timer.Q THEN
+IF NOT timer.Q THEN
     GVL.lightStatus := FALSE;  // Turn off the light after 15s delay
     GVL.timerActive := FALSE;  // Reset the timer state
 END_IF
@@ -27,7 +30,12 @@ END_IF
 ]]></ST>
     </Implementation>
     <LineIds Name="timerControl">
-      <LineId Id="42" Count="9" />
+      <LineId Id="42" Count="3" />
+      <LineId Id="69" Count="1" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="47" Count="2" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="50" Count="1" />
       <LineId Id="5" Count="0" />
       <LineId Id="57" Count="0" />
       <LineId Id="53" Count="3" />
