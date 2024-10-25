@@ -7,39 +7,27 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Start the TOF timer if the user moves away (light is still on) and the timer hasn't started
-IF NOT checkDistance(distance_in_function := GVL.distance) AND GVL.lightStatus THEN
-    GVL.timerActive := TRUE;
-    timer(IN := TRUE, PT := T#15S);  // Start 15second off-delay timer
+      <ST><![CDATA[// Check if the user is near the mirror and turn on the light
+IF checkDistance(distance_in_function := GVL.distance) THEN
+    GVL.lightStatus := TRUE;       // Turn on the light when user is near the mirror
+    timer(IN := FALSE);            // Reset the timer if user is near
+    GVL.timerActive := FALSE;      // Ensure timer is inactive if user is near
 ELSE
-    timer(IN := FALSE); // Deactivate the timer if the user is near the mirror
+    // If the user is farther than 1 meter and light is still on, start the timer
+    IF GVL.lightStatus THEN
+        GVL.timerActive := TRUE;
+        timer(IN := TRUE, PT := T#15S);  // Start 15-second off-delay timer
+    END_IF
 END_IF
 
-// If the timer finishes (Q goes TRUE), turn off the light
-//ELSIF NOT timer.Q THEN
-IF NOT timer.Q THEN
-    GVL.lightStatus := FALSE;  // Turn off the light after 15s delay
-    GVL.timerActive := FALSE;  // Reset the timer state
-END_IF
-
-// Reset the timer when the light is off (if the user moves away before timer completes)
-IF GVL.lightStatus = FALSE THEN
-    timer(IN := FALSE);  // Stop the timer
-    GVL.timerActive := FALSE;  // Reset timer active status
-END_IF
-]]></ST>
+// If the timer has finished (Q goes TRUE), turn off the light
+IF timer.Q THEN
+    GVL.lightStatus := FALSE;       // Turn off the light after 15s delay
+    GVL.timerActive := FALSE;       // Reset timer state
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="timerControl">
-      <LineId Id="42" Count="3" />
-      <LineId Id="69" Count="1" />
-      <LineId Id="64" Count="0" />
-      <LineId Id="47" Count="2" />
-      <LineId Id="71" Count="0" />
-      <LineId Id="50" Count="1" />
-      <LineId Id="5" Count="0" />
-      <LineId Id="57" Count="0" />
-      <LineId Id="53" Count="3" />
-      <LineId Id="52" Count="0" />
+      <LineId Id="72" Count="16" />
       <LineId Id="58" Count="0" />
     </LineIds>
   </POU>
