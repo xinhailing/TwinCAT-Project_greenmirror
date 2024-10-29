@@ -4,22 +4,35 @@
     <Declaration><![CDATA[PROGRAM lightControl
 VAR
     userNearMirror : BOOL;  // Variable to store whether the user is near the mirror
+	timer : TOF;  // Timer off-delay function block
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Call the function to check if the user is near the mirror
-userNearMirror := checkDistance(distance_in_function := GVL.distance);
+      <ST><![CDATA[timer(IN:=GVL.timerActive, PT := T#15S);
 
-// Turn on the light if the user is near the mirror
+// Call the function to check if the user is near the mirror
+userNearMirror := checkDistance(distance_in_function := GVL.distance);
+//When user near mirror, turn on the light and not turn on the timer
 IF userNearMirror = TRUE THEN
     GVL.lightStatus := TRUE;
+	GVL.timerActive := TRUE;	
 ELSIF userNearMirror = FALSE THEN
-    // Start the timer when the user moves away from the mirror
-    timerControl();  
+	GVL.timerActive := FALSE;
+	IF timer.Q THEN
+		GVL.lightStatus := TRUE;
+	ELSE 
+		GVL.lightStatus := FALSE;
+	END_IF
 END_IF]]></ST>
     </Implementation>
     <LineIds Name="lightControl">
-      <LineId Id="30" Count="8" />
+      <LineId Id="48" Count="1" />
+      <LineId Id="30" Count="1" />
+      <LineId Id="33" Count="2" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="56" Count="3" />
       <LineId Id="5" Count="0" />
     </LineIds>
   </POU>

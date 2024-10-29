@@ -3,32 +3,15 @@
   <POU Name="timerControl" Id="{d0c5777f-1fa4-4c4d-ab2e-69154685f57d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM timerControl
 VAR
-	 timer : TOF;  // Timer off-delay function block
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Check if the user is near the mirror and turn on the light
-IF checkDistance(distance_in_function := GVL.distance) THEN
-    GVL.lightStatus := TRUE;       // Turn on the light when user is near the mirror
-    timer(IN := FALSE);            // Reset the timer if user is near
-    GVL.timerActive := FALSE;      // Ensure timer is inactive if user is near
-ELSE
-    // If the user is farther than 1 meter and light is still on, start the timer
-    IF GVL.lightStatus THEN
-        GVL.timerActive := TRUE;
-        timer(IN := TRUE, PT := T#15S);  // Start 15-second off-delay timer
-    END_IF
-END_IF
-
-// If the timer has finished (Q goes TRUE), turn off the light
-IF timer.Q THEN
-    GVL.lightStatus := FALSE;       // Turn off the light after 15s delay
-    GVL.timerActive := FALSE;       // Reset timer state
-END_IF]]></ST>
+      <ST><![CDATA[
+]]></ST>
     </Implementation>
     <LineIds Name="timerControl">
-      <LineId Id="72" Count="16" />
       <LineId Id="58" Count="0" />
+      <LineId Id="93" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
