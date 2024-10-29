@@ -3,14 +3,20 @@
   <POU Name="timerControl" Id="{d0c5777f-1fa4-4c4d-ab2e-69154685f57d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM timerControl
 VAR
+	   timer : TOF;  // Timer function block for off-delay
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[
-]]></ST>
+      <ST><![CDATA[// Control the timer with the GVL.timerActive variable
+timer(IN := GVL.timerActive, PT := T#5S);
+
+// If the timer has finished (Q goes FALSE after 5s delay), turn off the light
+IF NOT timer.Q THEN
+    GVL.lightStatus := FALSE;
+END_IF]]></ST>
     </Implementation>
     <LineIds Name="timerControl">
-      <LineId Id="58" Count="0" />
+      <LineId Id="109" Count="5" />
       <LineId Id="93" Count="0" />
     </LineIds>
   </POU>

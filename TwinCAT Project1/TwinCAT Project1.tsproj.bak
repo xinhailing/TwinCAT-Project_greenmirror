@@ -16,7 +16,7 @@
 		</System>
 		<Plc>
 			<Project GUID="{C936A61D-0CB7-4E32-B37F-B6C1877C5CF9}" Name="plc_greenmirror" PrjFilePath="plc_greenmirror\plc_greenmirror.plcproj" TmcFilePath="plc_greenmirror\plc_greenmirror.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="plc_greenmirror\plc_greenmirror.tmc" TmcHash="{BB153ADA-43AB-0264-DDEE-764C8F31CDCC}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="plc_greenmirror\plc_greenmirror.tmc" TmcHash="{9BE4E08B-FF4C-93BC-3CA6-DA1B8329D2F9}">
 					<Name>plc_greenmirror Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Contexts>
